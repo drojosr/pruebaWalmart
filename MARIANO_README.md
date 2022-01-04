@@ -25,7 +25,7 @@ The basic architecture of kedro consists of three types of objects:
 
 Basically, a pipeline contains nodes that receives catalogs as inputs, and then python fucntions returns dataframes that can be saved as outputs catalogs.
 
-# Briefing
+# Deployment
 So, let's get started with the installation.
 The first thing I will ask you is to install "Miniconda", which I use to mantein my enviroment:
 
@@ -161,6 +161,8 @@ The filepath of this 2 outputs are:
 And for the last two functions, I used the resultConsoles catalalog to obtain:
 - The top 10 best games for each console/company.
 - The worst 10 games for each console/company.
+
+For this two other functions what I did was grouping the games by company/console with the joinedData:
 ```
 def top10BestGamesCompany(resultConsoles):
     grouped =resultConsoles.groupby(['company','console'])
@@ -198,7 +200,7 @@ The model file format is in this filepath:
 ./pruebaWalmart/DataModel/walmartModel.ndm2
 ```
 
-### Thanks again for the opportunity and I hope this README will be easy to understands.
+### Thanks again for the opportunity and I hope this README will be easy to understand.
 
 
 
