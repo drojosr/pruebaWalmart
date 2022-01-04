@@ -27,7 +27,7 @@ Basically, a pipeline contains nodes that receives catalogs as inputs, and then 
 
 # Deployment
 So, let's get started with the installation.
-The first thing I will ask you is to install "Miniconda", which I use to mantein my enviroment:
+The first thing I will ask you is to install "Miniconda", which I use to mantain my enviroment:
 
 * [Install Miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
 
