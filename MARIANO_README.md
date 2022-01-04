@@ -1,45 +1,182 @@
-# Data Engineer - Challenge
-This is the Basic Challenge for Data Engineers. 
+# Resume
 
-Lider.cl wants to create a new shiny section for videogames, to bring custom videogame information to our clients, our Analytics team needs a new report each day with several videogames information. This information will be used to create a lot of ML models & Data Science to give our customers the best experience and make the best decision of which videogame buy.
+Hello Mariano.
+Along with saying hello, I commented that this challenge was very entertaining, so thank you very much for the opportunity.
 
-For this Challenge, we want you to do a Job who give us the Data for the Analytics team, but with a few concerns:
-- The Job must be an ETL code in Java or Scala or Python.
-- We need the Data Model for the problem.
-- And we want a Deployment for this code.
+Now I will give you a summary of how I approached the problem:
+Thinking that an ETL solution is needed for the Analytics area, I used the Kedro framework which was created by QuantumBlack and McKinsey in Python and is very good open source tool for developing ML projects. Here's a little description:
 
-## ETL Job
-The job must receive the datasets & brings a few things:
+* [What is Kedro?](https://kedro.readthedocs.io/en/stable/01_introduction/01_introduction.html)
+
+The basic architecture of kedro consists of three types of objects:
+
+- A "catalog" is a source of information that can be a GCP Bucket, CSV, Parquet, JSON, BigQuery Table and others, which you declare in a YML file. It also can be versioned.
+- A "node" is the function where you will use the catalogs as inputs and outputs. Here is where I create the Python functions to resolve the problem, with the tag "walmart" that you are going to use to run the solution.
+- And finally a "pipeline" is the grouping of several nodes. In this case, the pipeline is called "dataEngineer".
+
+Basically, a pipeline contains nodes that receives catalogs as inputs, and then python fucntions returns dataframes that can be saved as outputs catalogs.
+
+# Briefing
+So, let's get started with the installation.
+The first thing I will ask you is to install "Miniconda", which I use to mantein my enviroment:
+
+* [Install Miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
+
+Once Miniconda is installed, let's create a folder to clone my repository:
+```
+mkdir "your folder" && cd "your folder"
+```
+
+After that, use this to clone my GitHub repo:
+```
+git clone https://github.com/drojosr/pruebaWalmart.git
+```
+
+Then, use this command to access to the repo folder and create the "kedro" enviroment with all the dependencies, included Kedro:
+```
+cd pruebaWalmart && conda env create -f enviroment.yml
+```
+
+Following we are going to activate the enviroment, and enter to the Deployment folder:
+```
+conda activate kedro && cd Deployment/kedro
+```
+Finally, we are going to execute the Kedro pipeline:
+```
+kedro run --tag walmart
+```
+If it worked well, You can look in the console that Kedro automatically generate a log that can be included in a log file:
+```
+2022-01-04 13:19:57,588 - kedro.io.data_catalog - INFO - Loading data from `result` (CSVDataSet)...
+2022-01-04 13:19:57,598 - kedro.pipeline.node - INFO - Running node: cleaningResult: cleaningResult([result]) -> [result_refined]
+2022-01-04 13:19:57,602 - kedro.io.data_catalog - INFO - Saving data to `result_refined` (CSVDataSet)...
+2022-01-04 13:19:57,624 - kedro.runner.sequential_runner - INFO - Completed 1 out of 6 tasks
+2022-01-04 13:19:57,624 - kedro.io.data_catalog - INFO - Loading data from `result_refined` (CSVDataSet)...
+2022-01-04 13:19:57,633 - kedro.io.data_catalog - INFO - Loading data from `consoles` (CSVDataSet)...
+2022-01-04 13:19:57,634 - kedro.pipeline.node - INFO - Running node: joinData: joinData([consoles,result_refined]) -> [result_consoles]
+2022-01-04 13:19:57,637 - kedro.io.data_catalog - INFO - Saving data to `result_consoles` (CSVDataSet)...
+2022-01-04 13:19:57,658 - kedro.runner.sequential_runner - INFO - Completed 2 out of 6 tasks
+2022-01-04 13:19:57,659 - kedro.io.data_catalog - INFO - Loading data from `result_refined` (CSVDataSet)...
+2022-01-04 13:19:57,667 - kedro.pipeline.node - INFO - Running node: top10WorstGames: top10WorstGames([result_refined]) -> [top_10_worst_game]
+2022-01-04 13:19:57,670 - kedro.io.data_catalog - INFO - Saving data to `top_10_worst_game` (CSVDataSet)...
+2022-01-04 13:19:57,671 - kedro.runner.sequential_runner - INFO - Completed 3 out of 6 tasks
+2022-01-04 13:19:57,671 - kedro.io.data_catalog - INFO - Loading data from `result_refined` (CSVDataSet)...
+2022-01-04 13:19:57,679 - kedro.pipeline.node - INFO - Running node: top10BestGames: top10BestGames([result_refined]) -> [top_10_best_game]
+2022-01-04 13:19:57,682 - kedro.io.data_catalog - INFO - Saving data to `top_10_best_game` (CSVDataSet)...
+2022-01-04 13:19:57,683 - kedro.runner.sequential_runner - INFO - Completed 4 out of 6 tasks
+2022-01-04 13:19:57,683 - kedro.io.data_catalog - INFO - Loading data from `result_consoles` (CSVDataSet)...
+2022-01-04 13:19:57,692 - kedro.pipeline.node - INFO - Running node: top10WorstGamesCompany: top10WorstGamesCompany([result_consoles]) -> [top_10_worst_game_company]
+2022-01-04 13:19:57,701 - kedro.io.data_catalog - INFO - Saving data to `top_10_worst_game_company` (CSVDataSet)...
+2022-01-04 13:19:57,702 - kedro.runner.sequential_runner - INFO - Completed 5 out of 6 tasks
+2022-01-04 13:19:57,702 - kedro.io.data_catalog - INFO - Loading data from `result_consoles` (CSVDataSet)...
+2022-01-04 13:19:57,710 - kedro.pipeline.node - INFO - Running node: top10BestGamesCompany: top10BestGamesCompany([result_consoles]) -> [top_10_best_game_company]
+2022-01-04 13:19:57,719 - kedro.io.data_catalog - INFO - Saving data to `top_10_best_game_company` (CSVDataSet)...
+2022-01-04 13:19:57,720 - kedro.runner.sequential_runner - INFO - Completed 6 out of 6 tasks
+2022-01-04 13:19:57,720 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully.
+```
+Also, you can actually see the pipeline using this command. This shows to you functions(F Icons) and catalogs(Databases Icons). This is very useful to show in comercial meetings or to explain somebody the arquitecture of the model solution:
+```
+kedro viz
+```
+Finally, you can remove the enviroment:
+```
+conda deactivate && conda remove --name kedro --all
+```
+
+# Explaining the solution
+First, this is the location of the node.
+As we explain above, this is the file with all the functions used to resolve the problem :
+
+```
+./pruebaWalmart/Deployment/kedro/src/walmart/pipelines/dataEngineer/nodes.py
+```
+### Cleaning
+So, the first what I do after cloning the repo was to check both csv files. 
+I encounter 2 consoles with blank spaces in the "result" file, so the pipeline starts with a cleaning function called "cleaningResult". This node takes the result csv and returns a refinedResult as an output catalog:
+
+```
+def cleaningResult(df):
+    df['console']=df['console'].str.strip()
+    return df
+```
+The filepath of this output is:
+```
+./pruebaWalmart/Deployment/kedro/data/02_intermediate/result_refined.csv
+```
+### Joindata ResultRefined - Consoles
+Now with the new refined result file we can merge it with consoles file with an inner join:
+```
+def joinData(refinedResults,consoles): 
+    df = refinedResults.merge(consoles,how='inner')
+    return df
+```
+The filepath of this output is:
+```
+./pruebaWalmart/Deployment/kedro/data/02_intermediate/resultConsoles.csv
+```
+
+### Top 10 best/worst games
+
+Now I can program the first 2 functions which deliver:
+- The top 10 best games for all consoles
+- The worst 10 games for all consoles.
+
+For this two functions I actually encounter many games with the same grade using metascore field (As we spoke), so I modify this and I used metascore and userscore for the sorting
+```
+def top10BestGames(refinedResults): 
+    df = refinedResults.sort_values(by=['metascore','userscore'],ascending= False).head(10).drop_duplicates(subset=['name'])
+    return df
+```
+```
+def top10WorstGames(refinedResults):   
+    df = refinedResults.sort_values(by=['metascore','userscore'],ascending= True).head(10).drop_duplicates(subset=['name'])
+    return df
+```
+The filepath of this 2 outputs are:
+```
+./pruebaWalmart/Deployment/kedro/data/08_reporting/top_10_best_game.csv
+./pruebaWalmart/Deployment/kedro/data/08_reporting/top_10_worst_game.csv
+```
+### Top 10 best/worst games/company
+Finally, I used the resultConsoles catalalog to obtain:
 - The top 10 best games for each console/company.
 - The worst 10 games for each console/company.
-- The top 10 best games for all consoles.
-- The worst 10 games for all consoles.
-The data is in the folder data/ in the root. The report can be exposed in any way you want, but remember this is an ETL Job.
-
-## Data Model
-The Data Model must be in 3NF. 
-Save the model in the DataModel folder in both formats (data model format & JPG/PNG).
 ```
-Use any tool, but please tell us the tool you choose & why.
+def top10BestGamesCompany(resultConsoles):
+    grouped =resultConsoles.groupby(['company','console'])
+    df=grouped.apply(lambda g: g.sort_values(by="metascore",ascending=False).head(10))
+    df2=df[['metascore','name']].reset_index()
+    df2=df2[['company','console','metascore','name']]
+    df2=pd.DataFrame(df2)
+    return df2
+```
+```
+def top10WorstGamesCompany(resultConsoles):   
+    grouped =resultConsoles.groupby(['company','console'])
+    df=grouped.apply(lambda g: g.sort_values(by="metascore",ascending=True).head(10))
+    df2=df[['metascore','name']].reset_index()
+    df2=df2[['company','console','metascore','name']]
+    df2=pd.DataFrame(df2)
+    return df2
+```
+The filepath of this 2 outputs are:
+```
+./pruebaWalmart/Deployment/kedro/data/08_reporting/top_10_best_game_company.csv
+./pruebaWalmart/Deployment/kedro/data/08_reporting/top_10_worst_game_company.csv
 ```
 
-## Deployment 
-We want you to give us the way to deploy your job and run it in any environment, So please put the way to deploy very clearly.
-
-## Concerns
-- You can create a new README for anything you want to tell us. Please don't name README.md
-- We want to see if you know how to code in a professional way, so use the best practices of Software Engineering!.
-- This is an ETL Job, so show us all you know about good practices to do ETL's.
-- Save all the changes in your personal GitHub account using a Fork from this repository and send us the link to clone and see the repository.
 
 
-### Disclaimer Note
-"This challenge is your cover letter, the elections you choose to do & not to do matters, and will be ask in the next interview"
 
 
-## Datasets
-We use the data from TopGames provided by Metascore.
 
-* [Kaggle: Metacritic reviewed games since 2000](https://www.kaggle.com/destring/metacritic-reviewed-games-since-2000)
+
+
+
+
+
+
+
+
 
 
