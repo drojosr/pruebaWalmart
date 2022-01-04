@@ -13,7 +13,8 @@ Along with saying hello, I can tell you that this challenge was very entertainin
 So thank you so much for the opportunity.
 
 Now I will give you a summary of how I approached the problem:
-Thinking that an ETL solution is needed for the Analytics area, I used the Kedro framework which was created by QuantumBlack and McKinsey in Python and is a very good open source tool for developing ML projects. Here's a little description:
+Thinking that an ETL solution is needed for the Analytics area, I used the Kedro framework which was created by QuantumBlack and McKinsey in Python and is a very good open source tool for developing ML projects.
+The solution was thought to be installed in a UNIX based SO:
 
 * [What is Kedro?](https://kedro.readthedocs.io/en/stable/01_introduction/01_introduction.html)
 
