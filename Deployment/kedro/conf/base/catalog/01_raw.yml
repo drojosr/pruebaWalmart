@@ -4,4 +4,4 @@ consoles:
 
 result:
   type: pandas.CSVDataSet
-  filepath: "${folders.raw2}/result.csv"
+  filepath: "${folders.raw}/result.csv"
