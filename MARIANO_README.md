@@ -13,7 +13,7 @@ Along with saying hello, I can tell you that this challenge was very entertainin
 So thank you so much for the opportunity.
 
 Now I will give you a summary of how I approached the problem:
-Thinking that an ETL solution is needed for the Analytics area, I used the Kedro framework which was created by QuantumBlack and McKinsey in Python and is very good open source tool for developing ML projects. Here's a little description:
+Thinking that an ETL solution is needed for the Analytics area, I used the Kedro framework which was created by QuantumBlack and McKinsey in Python and is a very good open source tool for developing ML projects. Here's a little description:
 
 * [What is Kedro?](https://kedro.readthedocs.io/en/stable/01_introduction/01_introduction.html)
 
@@ -87,6 +87,11 @@ Also, you can actually see the pipeline using this command. This shows to you fu
 ```
 kedro viz
 ```
+
+This is what the pipeline looks like :
+
+<img width="600" alt="visualization" src="https://user-images.githubusercontent.com/12601497/148120799-438b4b54-13ee-46f7-bd3f-6996c7bd8cf7.png">
+
 Finally, you can remove the enviroment:
 ```
 conda deactivate && conda remove --name kedro --all
@@ -94,11 +99,17 @@ conda deactivate && conda remove --name kedro --all
 
 # Explaining the solution
 First, this is the location of the node.
-As we explain above, this is the file with all the functions used to resolve the problem :
+As I explain above, this is the file with all the functions used to resolve the problem :
 
 ```
 ./pruebaWalmart/Deployment/kedro/src/walmart/pipelines/dataEngineer/nodes.py
 ```
+
+And this is the location of the whole dataEngineer pipeline:
+```
+./pruebaWalmart/Deployment/kedro/src/walmart/pipelines/dataEngineer/pipeline.py
+```
+
 ### Cleaning
 So, the first what I do after cloning the repo was to check both csv files. 
 I encounter 2 consoles with blank spaces in the "result" file, so the pipeline starts with a cleaning function called "cleaningResult". This node takes the result csv and returns a refinedResult as an output catalog:
@@ -147,7 +158,7 @@ The filepath of this 2 outputs are:
 ./pruebaWalmart/Deployment/kedro/data/08_reporting/top_10_worst_game.csv
 ```
 ### Top 10 best/worst games/company
-Finally, I used the resultConsoles catalalog to obtain:
+And for the last two functions, I used the resultConsoles catalalog to obtain:
 - The top 10 best games for each console/company.
 - The worst 10 games for each console/company.
 ```
@@ -173,6 +184,21 @@ The filepath of this 2 outputs are:
 ./pruebaWalmart/Deployment/kedro/data/08_reporting/top_10_best_game_company.csv
 ./pruebaWalmart/Deployment/kedro/data/08_reporting/top_10_worst_game_company.csv
 ```
+
+# Data Model
+Finally, this is the data model that I create based on the problem and the datasets.
+I use Navicat Data Modeler because has multiple DB to choose, it's very popular around the web and is open source thinking that I'm using a Mac. In fact, I haven't used a tool like this in a long time:
+
+![walmartModel](https://user-images.githubusercontent.com/12601497/148122115-42a34cfa-346c-4e62-8542-a1efa3a52679.png)
+
+"A company can have one or more games, but a game can be in only one company"
+
+The model file format is in this filepath:
+```
+./pruebaWalmart/DataModel/walmartModel.ndm2
+```
+
+### Thanks again for the opportunity and I hope this README will be easy to understands.
 
 
 
