@@ -1,7 +1,16 @@
 # Resume
 
 Hello Mariano.
-Along with saying hello, I commented that this challenge was very entertaining, so thank you very much for the opportunity.
+Along with saying hello, I can tell you that this challenge was very entertaining because it includes knowledge in:
+- Git
+- Python or Java
+- Basics of ML
+- DBA
+- ETL
+- Documentation
+- English
+
+So thank you so much for the opportunity.
 
 Now I will give you a summary of how I approached the problem:
 Thinking that an ETL solution is needed for the Analytics area, I used the Kedro framework which was created by QuantumBlack and McKinsey in Python and is very good open source tool for developing ML projects. Here's a little description:
