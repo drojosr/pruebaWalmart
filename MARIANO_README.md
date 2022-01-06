@@ -225,7 +225,7 @@ The filepath of this 2 outputs are:
 Finally, this is the data model that I create based on the problem and the datasets.
 I use Navicat Data Modeler because has multiple DB to choose, it's very popular around the web and is open source thinking that I'm using a Mac. In fact, I haven't used a tool like this in a long time:
 
-![walmartModel](https://user-images.githubusercontent.com/12601497/148122115-42a34cfa-346c-4e62-8542-a1efa3a52679.png)
+<img width="554" alt="Screen Shot 2022-01-06 at 11 43 46" src="https://user-images.githubusercontent.com/12601497/148400627-a1929836-778a-4f49-939b-8ee9d5f16e76.png">
 
 "A company can have one or more games, but a game can be in only one company"
 
