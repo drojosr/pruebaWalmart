@@ -1,3 +1,5 @@
+
+
 # Resume
 
 Hello Mariano.
@@ -27,6 +29,37 @@ The basic architecture of kedro consists of three types of objects:
 Basically, a pipeline contains nodes that receives catalogs as inputs, and then python fucntions returns dataframes that can be saved as outputs catalogs.
 
 # Deployment
+
+## V1.2
+This file was modified because the V1.1 failed.
+In this version we are going to use Ubuntu 18.04 LTS as OS.
+First, we are going to update and upgrade Ubuntu:
+```
+  sudo apt update
+  sudo apt upgrade
+```
+Then, we are going to download Miniconda, install it and create the enviroment "kedro"
+```
+  wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.10.3-Linux-x86_64.sh
+  bash Miniconda3-py39_4.10.3-Linux-x86_64.sh
+  conda create --name kedro python=3.9 && conda activate kedro
+```
+Now, we are going to install PIP3, Kedro itself whit kedro-viz and Pandas (which one was used to solve the problem):
+```
+  sudo apt install python3-pip
+  sudo pip3 install kedro==0.17.0
+  sudo pip3 install kedro-viz
+  sudo pip3 install pandas
+```
+Finally, lets clone the repo and run the pipeline
+```
+  mkdir "your folder" && cd "your folder"
+  git clone https://github.com/drojosr/pruebaWalmart.git
+  cd pruebaWalmart/Deployment/kedro
+  kedro run --tag walmart
+```
+
+## V1.1
 So, let's get started with the installation.
 The first thing I will ask you is to install "Miniconda", which I use to mantain my enviroment:
 
@@ -202,6 +235,8 @@ The model file format is in this filepath:
 ```
 
 ### Thanks again for the opportunity and I hope this README will be easy to understand.
+
+
 
 
 
